@@ -1,4 +1,4 @@
-import './style.css';
+import './css/style.css';
 
 let test = "Hello World - 2";
 console.log(test);
