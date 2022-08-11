@@ -1,6 +1,8 @@
 import './css/style.css';
+import {darkTheme, addThemeButtons} from './theme';
 
 let test = "Hello World";
 console.log(test);
 
-document.documentElement.style.setProperty('--bg-color', 'blue');
+addThemeButtons();
+darkTheme();
