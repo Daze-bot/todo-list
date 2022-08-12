@@ -1,6 +1,11 @@
 :root {
-  --bg-color: #333333;
-  --color-change-filter: ;
+  --primary-bg-color: ;
+  --content-bg-color: ;
+  --secondary-bg-color: ;
+  --color-change-filter1: ;
+  --color-change-filter2: ;
+  --primary-text-color: ;
+  --secondary-text-color: ;
 }
 
 * {
@@ -11,12 +16,50 @@
   margin: 0;
   font-size: 16px;
   list-style: none;
-  background-color: var(--bg-color);
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  grid-template: 120px 1fr 40px / 280px 1fr;
+}
+
+header {
+  grid-area: 1/1/2/3;
+  display: flex;
+  background-color: var(--secondary-bg-color);
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: min(1400px, 100vw);
+  margin: 0 auto;
+  padding: 0 20px;
+  color: var(--primary-bg-color);
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo h1 {
+  font-size: 3.5rem;
+}
+
+.logo img {
+  filter: var(--color-change-filter2);
+  height: 4rem;
 }
 
 .themeBtns img {
   cursor: pointer;
-  filter: var(--color-change-filter);
+  filter: var(--color-change-filter2);
+  height: 2rem;
 }
 
 .hidden {

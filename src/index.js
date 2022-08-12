@@ -1,7 +1,7 @@
 import './css/style.css';
-import {addThemeButtons} from './theme';
+import {createHeader, createSidebar, createFooter} from './initLoad';
 
 let test = "Hello World";
 console.log(test);
 
-document.body.appendChild(addThemeButtons());
+document.body.appendChild(createHeader());

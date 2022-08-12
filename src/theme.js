@@ -2,13 +2,19 @@ import DarkIcon from './imgs/dark-theme.svg';
 import LightIcon from './imgs/light-theme.svg';
 
 function darkTheme() {
-  document.documentElement.style.setProperty('--bg-color', '#333333');
-  document.documentElement.style.setProperty('--color-change-filter', 'brightness(4.12) saturate(100%) invert(100%) sepia(0%) saturate(7454%) hue-rotate(268deg) brightness(118%) contrast(101%)');
+  document.documentElement.style.setProperty('--primary-bg-color', '#333333');
+  document.documentElement.style.setProperty('--color-change-filter1', 'brightness(4.12) saturate(100%) invert(100%) sepia(0%) saturate(7454%) hue-rotate(268deg) brightness(118%) contrast(101%)');
+  document.documentElement.style.setProperty('--color-change-filter2', 'none');
 }
 
 function lightTheme() {
-  document.documentElement.style.setProperty('--bg-color', 'yellow');
-  document.documentElement.style.setProperty('--color-change-filter', 'none');
+  document.documentElement.style.setProperty('--primary-bg-color', 'white');
+  document.documentElement.style.setProperty('--content-bg-color', '#e2e8f0');
+  document.documentElement.style.setProperty('--secondary-bg-color', '#1992d4');
+  document.documentElement.style.setProperty('--color-change-filter1', 'none');
+  document.documentElement.style.setProperty('--color-change-filter2', 'brightness(4.12) saturate(100%) invert(100%) sepia(0%) saturate(7454%) hue-rotate(268deg) brightness(118%) contrast(101%)');
+  document.documentElement.style.setProperty('--primary-text-color', 'black');
+  document.documentElement.style.setProperty('--secondary-text-color', 'rgba(0, 0, 0, 0.7)');
 }
 
 function addThemeButtons() {
