@@ -1,6 +1,6 @@
 :root {
   --bg-color: #333333;
-  --color-change-filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7454%) hue-rotate(268deg) brightness(118%) contrast(101%);
+  --color-change-filter: ;
 }
 
 * {
@@ -12,6 +12,11 @@
   font-size: 16px;
   list-style: none;
   background-color: var(--bg-color);
+}
+
+.themeBtns img {
+  cursor: pointer;
+  filter: var(--color-change-filter);
 }
 
 .hidden {

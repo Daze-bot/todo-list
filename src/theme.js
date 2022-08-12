@@ -1,6 +1,9 @@
+import DarkIcon from './imgs/dark-theme.svg';
+import LightIcon from './imgs/light-theme.svg';
+
 function darkTheme() {
   document.documentElement.style.setProperty('--bg-color', '#333333');
-  document.documentElement.style.setProperty('--color-change-filter', 'brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7454%) hue-rotate(268deg) brightness(118%) contrast(101%)');
+  document.documentElement.style.setProperty('--color-change-filter', 'brightness(4.12) saturate(100%) invert(100%) sepia(0%) saturate(7454%) hue-rotate(268deg) brightness(118%) contrast(101%)');
 }
 
 function lightTheme() {
@@ -13,13 +16,13 @@ function addThemeButtons() {
   btnDiv.classList.add('themeBtns');
   
   let darkBtn = document.createElement('img');
-  darkBtn.setAttribute('src', './imgs/dark-theme.svg');
-  darkBtn.textContent = "Dark";
+  darkBtn.setAttribute('src', `${DarkIcon}`);
+  darkBtn.setAttribute('alt', "Dark Theme");
   darkBtn.classList.add('hidden', 'darkBtn');
 
   let lightBtn = document.createElement('img');
-  lightBtn.setAttribute('src', './imgs/light-theme.svg');
-  lightBtn.textContent = "Light";
+  lightBtn.setAttribute('src', `${LightIcon}`);
+  lightBtn.setAttribute('alt', "Light Theme");
   lightBtn.classList.add('lightBtn');
 
   btnDiv.appendChild(darkBtn);
