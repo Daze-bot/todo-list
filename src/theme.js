@@ -1,28 +1,50 @@
 function darkTheme() {
-  document.documentElement.style.setProperty('--bg-color', 'blue');
+  document.documentElement.style.setProperty('--bg-color', '#333333');
+  document.documentElement.style.setProperty('--color-change-filter', 'brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7454%) hue-rotate(268deg) brightness(118%) contrast(101%)');
 }
 
 function lightTheme() {
   document.documentElement.style.setProperty('--bg-color', 'yellow');
+  document.documentElement.style.setProperty('--color-change-filter', 'none');
 }
 
 function addThemeButtons() {
-  let btn0 = document.createElement('button');
-  btn0.textContent = "Dark";
-  let btn1 = document.createElement('button');
-  btn1.textContent = "Light";
+  let btnDiv = document.createElement('div');
+  btnDiv.classList.add('themeBtns');
+  
+  let darkBtn = document.createElement('img');
+  darkBtn.setAttribute('src', './imgs/dark-theme.svg');
+  darkBtn.textContent = "Dark";
+  darkBtn.classList.add('hidden', 'darkBtn');
 
-  document.body.appendChild(btn0);
-  document.body.appendChild(btn1);
+  let lightBtn = document.createElement('img');
+  lightBtn.setAttribute('src', './imgs/light-theme.svg');
+  lightBtn.textContent = "Light";
+  lightBtn.classList.add('lightBtn');
 
-  btn0.addEventListener('click', darkTheme);
-  btn1.addEventListener('click', lightTheme);
+  btnDiv.appendChild(darkBtn);
+  btnDiv.appendChild(lightBtn);
 
-  return document;
+  let currentTheme = localStorage.getItem("theme") || "light";
+  setTheme(currentTheme);
+
+  darkBtn.addEventListener('click', () => setTheme('dark'));
+  lightBtn.addEventListener('click', () => setTheme('light'));
+
+  function setTheme(mode) {
+    window.localStorage.setItem("theme", `${mode}`);
+    if (mode === "dark") {
+      darkBtn.classList.add('hidden');
+      lightBtn.classList.remove('hidden');
+      darkTheme();
+    } else if (mode === "light") {
+      darkBtn.classList.remove('hidden');
+      lightBtn.classList.add('hidden');
+      lightTheme()
+    }
+  }
+
+  return btnDiv;
 }
 
-export {
-  darkTheme,
-  lightTheme,
-  addThemeButtons,
-};
+export {addThemeButtons};
