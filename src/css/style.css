@@ -1,11 +1,14 @@
 :root {
-  --primary-bg-color: ;
+  --sidebar-bg-color: ;
   --content-bg-color: ;
-  --secondary-bg-color: ;
+  --header-bg-color: ;
   --color-change-filter1: ;
-  --color-change-filter2: ;
+  --change-white-filter: ;
+  --change-white-filter: ;
   --primary-text-color: ;
   --secondary-text-color: ;
+  --shadow-color: ;
+  --header-text-color: ;
 }
 
 * {
@@ -21,13 +24,15 @@
 body {
   min-height: 100vh;
   display: grid;
-  grid-template: 120px 1fr 40px / 280px 1fr;
+  grid-template: 100px 1fr 40px / 280px 1fr;
 }
 
 header {
   grid-area: 1/1/2/3;
   display: flex;
-  background-color: var(--secondary-bg-color);
+  background-color: var(--header-bg-color);
+  box-shadow: 0 4px 8px var(--shadow-color);
+  z-index: 5;
 }
 
 .headerContent {
@@ -37,7 +42,7 @@ header {
   width: min(1400px, 100vw);
   margin: 0 auto;
   padding: 0 20px;
-  color: var(--primary-bg-color);
+  color: var(--header-text-color);
 }
 
 .logo {
@@ -52,14 +57,34 @@ header {
 }
 
 .logo img {
-  filter: var(--color-change-filter2);
+  filter: var(--change-white-filter);
   height: 4rem;
 }
 
 .themeBtns img {
   cursor: pointer;
-  filter: var(--color-change-filter2);
+  filter: var(--change-white-filter);
   height: 2rem;
+}
+
+.sidebar {
+  grid-area: 2/1/3/2;
+  background-color: var(--sidebar-bg-color);
+  box-shadow: 2px 0 8px var(--shadow-color);
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  text-align: center;
+}
+
+.projects {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.projects img {
+  cursor: pointer;
 }
 
 .hidden {
