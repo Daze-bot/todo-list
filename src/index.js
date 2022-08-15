@@ -3,3 +3,4 @@ import {createHeader, createSidebar, createFooter} from './initLoad';
 
 document.body.appendChild(createHeader());
 document.body.appendChild(createSidebar());
+document.body.appendChild(createFooter());

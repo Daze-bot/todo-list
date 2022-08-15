@@ -1,6 +1,9 @@
 import {addThemeButtons} from './theme';
 import Logo from './imgs/logo.svg';
 import Add from './imgs/add.svg';
+import Home from './imgs/home.svg';
+import Today from './imgs/today.svg';
+import Week from './imgs/week.svg';
 
 function createHeader() {
   let header = document.createElement('header');
@@ -39,20 +42,31 @@ function createSidebar() {
 
   let homeLi = document.createElement('li');
   homeLi.textContent = "Home";
+  let homeImg = document.createElement('img');
+  homeImg.setAttribute('src', `${Home}`);
+  homeImg.setAttribute('alt', "Home");
+  homeLi.appendChild(homeImg);
+
   let todayLi = document.createElement('li');
   todayLi.textContent = "Today";
+  let todayImg = document.createElement('img');
+  todayImg.setAttribute('src', `${Today}`);
+  todayImg.setAttribute('alt', "Today");
+  todayLi.appendChild(todayImg);
+
   let weekLi = document.createElement('li');
   weekLi.textContent = "This Week";
+  let weekImg = document.createElement('img');
+  weekImg.setAttribute('src', `${Week}`);
+  weekImg.setAttribute('alt', "Week");
+  weekLi.appendChild(weekImg);
 
   defaultTabs.appendChild(homeLi);
   defaultTabs.appendChild(todayLi);
   defaultTabs.appendChild(weekLi);
-
-  let projectsTabs = document.createElement('ul');
-  projectsTabs.classList.add('projectsList');
   
-  let projects = document.createElement('li');
-  projects.classList.add('projects');
+  let projects = document.createElement('div');
+  projects.setAttribute('id', 'projects');
 
   let project = document.createTextNode('Projects');
   let add = document.createElement('img');
@@ -62,16 +76,27 @@ function createSidebar() {
   projects.appendChild(project);
   projects.appendChild(add);
 
-  projectsTabs.appendChild(projects);
+  let projectsTabs = document.createElement('ul');
+  projectsTabs.classList.add('projectsList');
 
   sidebar.appendChild(defaultTabs);
+  sidebar.appendChild(projects);
   sidebar.appendChild(projectsTabs);
 
   return sidebar;
 }
 
 function createFooter() {
+  let footer = document.createElement('footer');
 
+  let a = document.createElement('a');
+  a.textContent = "Created by Code4Daze";
+  a.setAttribute('href', 'https://github.com/Daze-bot');
+  a.setAttribute('target', '_blank');
+
+  footer.appendChild(a);
+
+  return footer;
 }
 
 export {

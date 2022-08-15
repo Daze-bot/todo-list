@@ -11,6 +11,7 @@ function darkTheme() {
   document.documentElement.style.setProperty('--primary-text-color', 'white');
   document.documentElement.style.setProperty('--header-text-color', 'white');
   document.documentElement.style.setProperty('--shadow-color', 'rgba(0, 0, 0, 0.2)');
+  document.documentElement.style.setProperty('--li-hover-color', '#8f9299');
 }
 
 function lightTheme() {
@@ -24,6 +25,7 @@ function lightTheme() {
   document.documentElement.style.setProperty('--secondary-text-color', 'rgba(0, 0, 0, 0.7)');
   document.documentElement.style.setProperty('--shadow-color', 'rgba(0, 0, 0, 0.2)');
   document.documentElement.style.setProperty('--header-text-color', 'white');
+  document.documentElement.style.setProperty('--li-hover-color', '#c6ccd4');
 }
 
 function addThemeButtons() {

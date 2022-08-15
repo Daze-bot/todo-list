@@ -9,6 +9,7 @@
   --secondary-text-color: ;
   --shadow-color: ;
   --header-text-color: ;
+  --li-hover-color: ;
 }
 
 * {
@@ -24,7 +25,7 @@
 body {
   min-height: 100vh;
   display: grid;
-  grid-template: 100px 1fr 40px / 280px 1fr;
+  grid-template: 100px 1fr 30px / 280px 1fr;
 }
 
 header {
@@ -73,18 +74,67 @@ header {
   box-shadow: 2px 0 8px var(--shadow-color);
   display: flex;
   flex-direction: column;
-  gap: 50px;
-  text-align: center;
+  gap: 20px;
+  color: var(--primary-text-color);
+  padding: 20px 20px;
 }
 
-.projects {
+.sidebar li {
   display: flex;
   align-items: center;
-  justify-content: center;
+  position: relative;
+  padding: 10px 0 10px 60px;
+  cursor: pointer;
+  border-radius: 4px;
 }
 
-.projects img {
+.sidebar li:hover {
+  background-color: var(--li-hover-color);
+}
+
+.sidebar li img {
+  filter: var(--color-change-filter1);
+  position: absolute;
+  left: 20px
+}
+
+.default,
+.projectsList {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+#projects {
+  display: flex;
+  align-items: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  padding-left: 10px;
+  gap: 60px;
+}
+
+#projects img {
   cursor: pointer;
+  filter: var(--color-change-filter1);
+  height: 2.4rem;
+}
+
+footer {
+  grid-area: 3/1/4/3;
+  text-align: center;
+  background-color: var(--header-bg-color);
+  color: var(--header-text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer a:link,
+footer a:visited,
+footer a:active {
+  text-decoration: none;
+  color: var(--header-text-color);
 }
 
 .hidden {
