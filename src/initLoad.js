@@ -72,6 +72,7 @@ function createSidebar() {
   let add = document.createElement('img');
   add.setAttribute('src', `${Add}`);
   add.setAttribute('alt', "Add Project");
+  add.classList.add('newProject');
 
   projects.appendChild(project);
   projects.appendChild(add);
