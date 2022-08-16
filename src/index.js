@@ -7,5 +7,4 @@ document.body.appendChild(createSidebar());
 document.body.appendChild(createFooter());
 
 let addBtn = document.querySelector('.newProject');
-
 addBtn.addEventListener('click', createProject);
