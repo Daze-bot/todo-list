@@ -19,7 +19,7 @@ function createHeader() {
   logoImg.setAttribute('alt', "Logo");
 
   let logoText = document.createElement('h1');
-  logoText.textContent = "Todo List";
+  logoText.textContent = "To-do List";
 
   logo.appendChild(logoImg);
   logo.appendChild(logoText);

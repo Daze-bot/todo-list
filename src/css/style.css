@@ -111,13 +111,20 @@ header {
   font-size: 1.8rem;
   font-weight: 700;
   padding-left: 10px;
-  gap: 60px;
+  gap: 50px;
 }
 
 #projects img {
   cursor: pointer;
   filter: var(--color-change-filter1);
   height: 2.4rem;
+  width: 3rem;
+  transition: .3s;
+}
+
+#projects img:hover {
+  transform: rotate(90deg);
+  transition: .3s;
 }
 
 footer {
