@@ -4,12 +4,9 @@ import LightIcon from './imgs/light-theme.svg';
 function darkTheme() {
   document.documentElement.style.setProperty('--sidebar-bg-color', '#707379');
   document.documentElement.style.setProperty('--content-bg-color', '#333333');
-  document.documentElement.style.setProperty('--header-bg-color', '#1992d4');
-  document.documentElement.style.setProperty('--change-white-filter', 'brightness(4.12) saturate(100%) invert(100%) sepia(0%) saturate(7454%) hue-rotate(268deg) brightness(118%) contrast(101%)');
   document.documentElement.style.setProperty('--color-change-filter1', 'brightness(4.12) saturate(100%) invert(100%) sepia(0%) saturate(7454%) hue-rotate(268deg) brightness(118%) contrast(101%)');
   document.documentElement.style.setProperty('--color-change-filter2', 'none');
   document.documentElement.style.setProperty('--primary-text-color', 'white');
-  document.documentElement.style.setProperty('--header-text-color', 'white');
   document.documentElement.style.setProperty('--shadow-color', 'rgba(0, 0, 0, 0.2)');
   document.documentElement.style.setProperty('--li-hover-color', '#8f9299');
 }
@@ -17,14 +14,11 @@ function darkTheme() {
 function lightTheme() {
   document.documentElement.style.setProperty('--sidebar-bg-color', '#e2e8f0');
   document.documentElement.style.setProperty('--content-bg-color', 'white');
-  document.documentElement.style.setProperty('--header-bg-color', '#1992d4');
-  document.documentElement.style.setProperty('--change-white-filter', 'brightness(4.12) saturate(100%) invert(100%) sepia(0%) saturate(7454%) hue-rotate(268deg) brightness(118%) contrast(101%)');
   document.documentElement.style.setProperty('--color-change-filter1', 'none');
   document.documentElement.style.setProperty('--color-change-filter2', 'brightness(4.12) saturate(100%) invert(100%) sepia(0%) saturate(7454%) hue-rotate(268deg) brightness(118%) contrast(101%)');
   document.documentElement.style.setProperty('--primary-text-color', 'black');
   document.documentElement.style.setProperty('--secondary-text-color', 'rgba(0, 0, 0, 0.7)');
   document.documentElement.style.setProperty('--shadow-color', 'rgba(0, 0, 0, 0.2)');
-  document.documentElement.style.setProperty('--header-text-color', 'white');
   document.documentElement.style.setProperty('--li-hover-color', '#c6ccd4');
 }
 

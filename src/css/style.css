@@ -1,14 +1,15 @@
 :root {
   --sidebar-bg-color: ;
   --content-bg-color: ;
-  --header-bg-color: ;
+  --header-bg-color: #1992d4;
   --color-change-filter1: ;
-  --change-white-filter: ;
-  --change-white-filter: ;
+  --color-change-filter2: ;
+  --change-white-filter: brightness(4.12) saturate(100%) invert(100%) sepia(0%) saturate(7454%) hue-rotate(268deg) brightness(118%) contrast(101%);
   --primary-text-color: ;
   --secondary-text-color: ;
   --shadow-color: ;
-  --header-text-color: ;
+  --dark-shadow-color: rgba(0, 0, 0, 0.6);
+  --header-text-color: white;
   --li-hover-color: ;
 }
 
@@ -26,6 +27,7 @@ body {
   min-height: 100vh;
   display: grid;
   grid-template: 100px 1fr 30px / 280px 1fr;
+  position: relative;
 }
 
 header {
@@ -33,7 +35,7 @@ header {
   display: flex;
   background-color: var(--header-bg-color);
   box-shadow: 0 4px 8px var(--shadow-color);
-  z-index: 5;
+  z-index: 3;
 }
 
 .headerContent {
@@ -125,6 +127,85 @@ header {
 #projects img:hover {
   transform: rotate(90deg);
   transition: .3s;
+}
+
+.content {
+  grid-area: 2/2/3/3;
+}
+
+.newProjectContainer {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 5;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.newProjectForm {
+  background-color: var(--sidebar-bg-color);
+  color: var(--primary-text-color);
+  padding: 40px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  border-radius: 8px;
+  position: relative;
+}
+
+.newProjectForm p {
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+
+.entry input,
+.entry label {
+  display: block;
+  width: 100%;
+  font-size: 1.2rem;
+}
+
+.entry label {
+  margin-bottom: 4px;
+}
+
+.entry input {
+  outline: none;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+}
+
+.entry input:hover {
+  box-shadow: 0 0 8px var(--shadow-color);
+}
+
+.entry input:focus {
+  box-shadow: 0 0 8px var(--dark-shadow-color);
+}
+
+.submitNewProject {
+  padding: 10px 30px;
+  font-size: 1.7rem;
+  font-weight: 700;
+  background-color: var(--header-bg-color);
+  border: none;
+  border-radius: 12px;
+  color: var(--header-text-color);
+}
+
+.submitNewProject:hover {
+  box-shadow: 0 2px 6px var(--shadow-color);
+  cursor: pointer;
+}
+
+.submitNewProject:active {
+  box-shadow: none;
+  transform: translateY(2px);
 }
 
 footer {
