@@ -1,12 +1,13 @@
 import Folder from './imgs/folder.svg';
 
-let projects = [];
-let projectID = 0;
+let projects = JSON.parse(localStorage.getItem("projects") || "[]");
+let projectID = +localStorage.getItem("projectID") || 0;
 
 class Project {
   constructor(name, id) {
     this.name = name;
     this.id = id;
+    this.tasks = [];
   }
 }
 
@@ -58,8 +59,9 @@ function createProject() {
 
 function addProject(project) {
   projects.push(project);
+  saveProjects();
+  saveProjectID();
   displayProject(project.name, project.id);
-  console.log(projects);
 }
 
 function displayProject(name, id) {
@@ -85,7 +87,30 @@ function closeProjectForm() {
   resetBtn.click();
 }
 
+function saveProjects() {
+  window.localStorage.setItem("projects", JSON.stringify(projects));
+}
+
+function saveProjectID() {
+  window.localStorage.setItem("projectID", projectID);
+}
+
+function loadProjects(array) {
+  for (let item of array) {
+    displayProject(item.name, item.id);
+  }
+}
+
+function clearAndReloadProjects(array) {
+  let projectsList = document.querySelector('.projectsList');
+  while (projectsList.hasChildNodes()) {
+    projectsList.removeChild(projectsList.lastChild);
+  }
+  loadProjects(array);
+}
+
 export {
   projects,
   showNewProjectForm,
+  loadProjects,
 };
