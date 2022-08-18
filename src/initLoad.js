@@ -42,6 +42,7 @@ function createSidebar() {
 
   let homeLi = document.createElement('li');
   homeLi.textContent = "Home";
+  homeLi.classList.add('defaultLi');
   let homeImg = document.createElement('img');
   homeImg.setAttribute('src', `${Home}`);
   homeImg.setAttribute('alt', "Home");
@@ -49,6 +50,7 @@ function createSidebar() {
 
   let todayLi = document.createElement('li');
   todayLi.textContent = "Today";
+  todayLi.classList.add('defaultLi');
   let todayImg = document.createElement('img');
   todayImg.setAttribute('src', `${Today}`);
   todayImg.setAttribute('alt', "Today");
@@ -56,6 +58,7 @@ function createSidebar() {
 
   let weekLi = document.createElement('li');
   weekLi.textContent = "This Week";
+  weekLi.classList.add('defaultLi');
   let weekImg = document.createElement('img');
   weekImg.setAttribute('src', `${Week}`);
   weekImg.setAttribute('alt', "Week");

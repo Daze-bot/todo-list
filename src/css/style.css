@@ -135,6 +135,14 @@ header {
   grid-area: 2/2/3/3;
   background-color: var(--content-bg-color);
   color: var(--primary-text-color);
+  padding: 20px;
+  overflow-y: auto;
+  max-height: calc(100vh - 130px);
+}
+
+.content h1 {
+  text-align: center;
+  font-size: 3rem;
 }
 
 .newProjectContainer {

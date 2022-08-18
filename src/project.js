@@ -1,4 +1,5 @@
 import Folder from './imgs/folder.svg';
+import {showContent} from './showContent.js';
 
 let projects = JSON.parse(localStorage.getItem("projects") || "[]");
 let projectID = +localStorage.getItem("projectID") || 0;
@@ -48,12 +49,16 @@ function submitProjectForm() {
 function createProject() {
   let projectName = document.querySelector('#projectNameInput').value;
 
-  if (projectName !== "") {
-    projectID += 1;
-    let newProject = new Project(projectName, projectID);
-    addProject(newProject);
+  if (projects.some(x => x.name === projectName)) {
+    alert("That project name already exists, please choose another!");
   } else {
-    closeProjectForm();
+    if (projectName !== "") {
+      projectID += 1;
+      let newProject = new Project(projectName, projectID);
+      addProject(newProject);
+    } else {
+      closeProjectForm();
+    }
   }
 }
 
@@ -68,6 +73,7 @@ function displayProject(name, id) {
   let projectsList = document.querySelector('.projectsList');
 
   let newProject = document.createElement('li');
+  newProject.classList.add('projectName');
   newProject.dataset.id = `${id}`;
   newProject.textContent = `${name}`;
   let img = document.createElement('img');
@@ -76,6 +82,8 @@ function displayProject(name, id) {
   newProject.appendChild(img);
 
   projectsList.appendChild(newProject);
+
+  newProject.addEventListener('click', () => showContent(name));
 
   closeProjectForm();
 }
