@@ -124,24 +124,24 @@ function showProjectEditForm(name) {
   projectEditContainer.classList.remove('hidden');
   projectNameEdit.focus();
   projectNameEdit.select();
-  submitEditForm(name);
+  submitEditForm();
 }
 
-function submitEditForm(name) {
+function submitEditForm() {
   let editSubmitBtn = document.querySelector('.submitProjectChange');
-  editSubmitBtn.addEventListener('click', () => confirmChange(name));
+  editSubmitBtn.addEventListener('click', confirmChange);
 
   let formCloseBtn = document.querySelector('.editProjectClose');
   formCloseBtn.addEventListener('click', closeProjectEditForm);
 
   let deleteBtn = document.querySelector('.deleteProject');
-  deleteBtn.addEventListener('click', () => deleteProject(name));
+  deleteBtn.addEventListener('click', deleteProject);
 
   let projectNameEdit = document.querySelector('#projectNameEdit');
   projectNameEdit.addEventListener('keypress', function(event) {
     if (event.key === "Enter") {
       event.preventDefault();
-      confirmChange(name);
+      confirmChange;
     }
   });
 
@@ -156,10 +156,14 @@ function submitEditForm(name) {
   });
 }
 
-function confirmChange(name) {
+function confirmChange() {
+  let currentName = document.querySelector('.currentProjectName').textContent;
+
+  console.log(currentName);
+
   let newProjectName = document.querySelector('#projectNameEdit').value;
 
-  if (name === newProjectName) {
+  if (currentName === newProjectName) {
     closeProjectEditForm();
   }
 }

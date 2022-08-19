@@ -12,6 +12,7 @@ function showProjectContent(projectName) {
   contentHead.classList.add('contentHead');
 
   let projectTitle = document.createElement('h1');
+  projectTitle.classList.add('currentProjectName');
   projectTitle.textContent = `${projectName}`;
 
   let editBtn = document.createElement('img');
