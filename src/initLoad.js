@@ -5,6 +5,7 @@ import Home from './imgs/home.svg';
 import Today from './imgs/today.svg';
 import Week from './imgs/week.svg';
 import Close from './imgs/close.svg';
+import {showNewProjectForm} from './project';
 
 function createHeader() {
   let header = document.createElement('header');
@@ -76,6 +77,7 @@ function createSidebar() {
   add.setAttribute('src', `${Add}`);
   add.setAttribute('alt', "Add Project");
   add.classList.add('newProject');
+  add.addEventListener('click', showNewProjectForm);
 
   projects.appendChild(project);
   projects.appendChild(add);
@@ -120,7 +122,7 @@ function createNewProjectForm() {
   newProjectForm.setAttribute('autocomplete', 'off');
 
   let closeImg = document.createElement('img');
-  closeImg.classList.add('closeBtn', 'formClose');
+  closeImg.classList.add('closeBtn', 'newProjectClose');
   closeImg.setAttribute('src', `${Close}`);
   closeImg.setAttribute('alt', 'Close');
 
@@ -146,7 +148,7 @@ function createNewProjectForm() {
   submitBtn.setAttribute('type', 'button');
 
   let resetBtn = document.createElement('button');
-  resetBtn.classList.add('resetForm', 'hidden');
+  resetBtn.classList.add('resetNewProjectForm', 'hidden');
   resetBtn.setAttribute('type', 'reset');
 
   newProjectDiv.appendChild(newProjectForm);
@@ -163,10 +165,75 @@ function createNewProjectForm() {
   return newProjectDiv;
 }
 
+function createProjectEditForm() {
+  let projectEditDiv = document.createElement('div');
+  projectEditDiv.classList.add('projectEditContainer', 'hidden');
+
+  let editProjectForm = document.createElement('form');
+  editProjectForm.classList.add('editProjectForm');
+  editProjectForm.setAttribute('action', "");
+  editProjectForm.setAttribute('autocomplete', 'off');
+
+  let closeImg = document.createElement('img');
+  closeImg.classList.add('closeBtn', 'editProjectClose');
+  closeImg.setAttribute('src', `${Close}`);
+  closeImg.setAttribute('alt', 'Close');
+
+  let formHeader = document.createElement('p');
+  formHeader.textContent = "Edit Project";
+
+  let inputDiv = document.createElement('div');
+  inputDiv.classList.add('input', 'entry');
+
+  let formLabel = document.createElement('label');
+  formLabel.setAttribute('for', 'projectNameEdit');
+  formLabel.textContent = "Change Name:";
+
+  let formInput = document.createElement('input');
+  formInput.setAttribute('type', 'text');
+  formInput.setAttribute('name', 'projectNameEdit');
+  formInput.setAttribute('id', 'projectNameEdit');
+  formInput.setAttribute('required', "");
+
+  let buttonDiv = document.createElement('div');
+  buttonDiv.classList.add('formButtons');
+
+  let submitBtn = document.createElement('button');
+  submitBtn.classList.add('submitProjectChange');
+  submitBtn.textContent = "Save Changes";
+  submitBtn.setAttribute('type', 'button');
+
+  let deleteBtn = document.createElement('button');
+  deleteBtn.classList.add('deleteProject');
+  deleteBtn.textContent = "Delete Project";
+  deleteBtn.setAttribute('type', 'button');
+
+  let resetBtn = document.createElement('button');
+  resetBtn.classList.add('resetEditProjectForm', 'hidden');
+  resetBtn.setAttribute('type', 'reset');
+
+  projectEditDiv.appendChild(editProjectForm);
+
+  editProjectForm.appendChild(closeImg);
+  editProjectForm.appendChild(formHeader);
+  editProjectForm.appendChild(inputDiv);
+  editProjectForm.appendChild(buttonDiv);
+  editProjectForm.appendChild(resetBtn);
+
+  inputDiv.appendChild(formLabel);
+  inputDiv.appendChild(formInput);
+
+  buttonDiv.appendChild(submitBtn);
+  buttonDiv.appendChild(deleteBtn);
+
+  return projectEditDiv;
+}
+
 export {
   createHeader,
   createSidebar,
   createContent,
   createFooter,
   createNewProjectForm,
+  createProjectEditForm,
 }

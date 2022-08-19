@@ -138,25 +138,50 @@ header {
   padding: 20px;
   overflow-y: auto;
   max-height: calc(100vh - 130px);
+  position: relative;
 }
 
-.content h1 {
+.contentHead {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.contentHead h1 {
   text-align: center;
   font-size: 3rem;
 }
 
-.newProjectContainer {
+.editBtn {
+  cursor: pointer;
+  padding: 5px;
+  filter: var(--color-change-filter1);
+}
+
+.editBtn:hover {
+  scale: 1.2;
+}
+
+.newProjectContainer,
+.projectEditContainer {
   position: fixed;
   height: 100%;
   width: 100%;
   z-index: 5;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.newProjectForm {
+.projectEditContainer {
+  padding-left: 280px;
+}
+
+.newProjectForm,
+.editProjectForm {
   background-color: var(--sidebar-bg-color);
   color: var(--primary-text-color);
   padding: 40px 80px;
@@ -169,9 +194,14 @@ header {
   position: relative;
 }
 
-.newProjectForm p {
+.newProjectForm p,
+.editProjectForm p {
   font-weight: 700;
   font-size: 1.7rem;
+}
+
+.entry {
+  width: 100%;
 }
 
 .entry input,
@@ -200,7 +230,13 @@ header {
   box-shadow: 0 0 8px var(--dark-shadow-color);
 }
 
-.submitNewProject {
+.formButtons {
+  display: flex;
+  gap: 20px;
+}
+
+.submitNewProject,
+.submitProjectChange {
   padding: 10px 30px;
   font-size: 1.3rem;
   font-weight: 700;
@@ -210,12 +246,26 @@ header {
   color: var(--header-text-color);
 }
 
-.submitNewProject:hover {
+.deleteProject {
+  padding: 10px 30px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  background-color: red;
+  border: none;
+  border-radius: 12px;
+  color: var(--header-text-color);
+}
+
+.submitNewProject:hover,
+.submitProjectChange:hover,
+.deleteProject:hover {
   box-shadow: 0 2px 10px var(--shadow-color);
   cursor: pointer;
 }
 
-.submitNewProject:active {
+.submitNewProject:active,
+.submitProjectChange:active,
+.deleteProject:active {
   box-shadow: none;
   transform: translateY(2px);
 }

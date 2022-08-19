@@ -1,5 +1,5 @@
 import Folder from './imgs/folder.svg';
-import {showContent} from './showContent.js';
+import {showProjectContent, showDefaultContent} from './showContent.js';
 
 let projects = JSON.parse(localStorage.getItem("projects") || "[]");
 let projectID = +localStorage.getItem("projectID") || 0;
@@ -24,8 +24,8 @@ function submitProjectForm() {
   let projectSubmitBtn = document.querySelector('.submitNewProject');
   projectSubmitBtn.addEventListener('click', createProject);
 
-  let formCloseBtn = document.querySelector('.formClose');
-  formCloseBtn.addEventListener('click', closeProjectForm);
+  let formCloseBtn = document.querySelector('.newProjectClose');
+  formCloseBtn.addEventListener('click', closeNewProjectForm);
 
   let projectNameInput = document.querySelector('#projectNameInput');
   projectNameInput.addEventListener('keypress', function(event) {
@@ -33,7 +33,7 @@ function submitProjectForm() {
       event.preventDefault();
       createProject();
     }
-  })
+  });
 
   let projectForm = document.querySelector('.newProjectForm');
   let projectContainer = document.querySelector('.newProjectContainer');
@@ -41,7 +41,7 @@ function submitProjectForm() {
     if (projectForm.contains(e.target)) {
       return;
     } else {
-      closeProjectForm();
+      closeNewProjectForm();
     }
   });
 }
@@ -57,7 +57,7 @@ function createProject() {
       let newProject = new Project(projectName, projectID);
       addProject(newProject);
     } else {
-      closeProjectForm();
+      closeNewProjectForm();
     }
   }
 }
@@ -83,14 +83,14 @@ function displayProject(name, id) {
 
   projectsList.appendChild(newProject);
 
-  newProject.addEventListener('click', () => showContent(name));
+  newProject.addEventListener('click', () => showProjectContent(name));
 
-  closeProjectForm();
+  closeNewProjectForm();
 }
 
-function closeProjectForm() {
+function closeNewProjectForm() {
   let projectContainer = document.querySelector('.newProjectContainer');
-  let resetBtn = document.querySelector('.resetForm');
+  let resetBtn = document.querySelector('.resetNewProjectForm');
   projectContainer.classList.add('hidden');
   resetBtn.click();
 }
@@ -117,8 +117,69 @@ function clearAndReloadProjects(array) {
   loadProjects(array);
 }
 
+function showProjectEditForm(name) {
+  let projectEditContainer = document.querySelector('.projectEditContainer');
+  let projectNameEdit = document.querySelector('#projectNameEdit');
+  projectNameEdit.setAttribute('value', `${name}`);
+  projectEditContainer.classList.remove('hidden');
+  projectNameEdit.focus();
+  projectNameEdit.select();
+  submitEditForm(name);
+}
+
+function submitEditForm(name) {
+  let editSubmitBtn = document.querySelector('.submitProjectChange');
+  editSubmitBtn.addEventListener('click', () => confirmChange(name));
+
+  let formCloseBtn = document.querySelector('.editProjectClose');
+  formCloseBtn.addEventListener('click', closeProjectEditForm);
+
+  let deleteBtn = document.querySelector('.deleteProject');
+  deleteBtn.addEventListener('click', () => deleteProject(name));
+
+  let projectNameEdit = document.querySelector('#projectNameEdit');
+  projectNameEdit.addEventListener('keypress', function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      confirmChange(name);
+    }
+  });
+
+  let editForm = document.querySelector('.editProjectForm');
+  let projectEditContainer = document.querySelector('.projectEditContainer');
+  projectEditContainer.addEventListener('click', function(e) {
+    if (editForm.contains(e.target)) {
+      return;
+    } else {
+      closeProjectEditForm();
+    }
+  });
+}
+
+function confirmChange(name) {
+  let newProjectName = document.querySelector('#projectNameEdit').value;
+
+  if (name === newProjectName) {
+    closeProjectEditForm();
+  }
+}
+
+function closeProjectEditForm() {
+  let projectEditContainer = document.querySelector('.projectEditContainer');
+  let resetBtn = document.querySelector('.resetEditProjectForm');
+  projectEditContainer.classList.add('hidden');
+  resetBtn.click();
+}
+
+function deleteProject(name) {
+
+
+  showDefaultContent("Home");
+}
+
 export {
   projects,
   showNewProjectForm,
   loadProjects,
+  showProjectEditForm,
 };
