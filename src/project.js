@@ -6,7 +6,7 @@ let projects = JSON.parse(localStorage.getItem("projects") || "[]");
 let projectID = +localStorage.getItem("projectID") || 0;
 
 class Project {
-  constructor(name, id) {
+  constructor (name, id) {
     this.name = name;
     this.id = id;
     this.tasks = [];
