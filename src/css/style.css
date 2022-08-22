@@ -302,6 +302,10 @@ footer a:hover {
   font-weight: 700;
 }
 
+.selected {
+  background-color: var(--li-hover-color);
+}
+
 .hidden {
   display: none;
 }

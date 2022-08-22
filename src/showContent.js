@@ -24,6 +24,8 @@ function showProjectContent(projectName) {
   content.appendChild(contentHead);
   contentHead.appendChild(projectTitle);
   contentHead.appendChild(editBtn);
+
+  highlightSelectedProject();
 }
 
 function showDefaultContent(name) {
@@ -40,6 +42,20 @@ function showDefaultContent(name) {
 
   content.appendChild(contentHead);
   contentHead.appendChild(projectTitle);
+
+  highlightSelectedProject();
+}
+
+function highlightSelectedProject() {
+  let projectLi = document.querySelectorAll('li');
+  let projectName = document.querySelector('.contentHead').textContent;
+
+  projectLi.forEach(li => {
+    li.classList.remove('selected');
+    if (li.textContent === projectName) {
+      li.classList.add('selected');
+    }
+  });
 }
 
 export {
