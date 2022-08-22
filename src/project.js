@@ -1,5 +1,6 @@
 import Folder from './imgs/folder.svg';
 import {showProjectContent, showDefaultContent} from './showContent.js';
+import {createProjectEditForm, createNewProjectForm} from './initLoad';
 
 let projects = JSON.parse(localStorage.getItem("projects") || "[]");
 let projectID = +localStorage.getItem("projectID") || 0;
@@ -13,6 +14,7 @@ class Project {
 }
 
 function showNewProjectForm() {
+  document.body.appendChild(createNewProjectForm());
   let projectContainer = document.querySelector('.newProjectContainer');
   let projectNameInput = document.querySelector('#projectNameInput');
   projectContainer.classList.remove('hidden');
@@ -67,6 +69,8 @@ function addProject(project) {
   saveProjects();
   saveProjectID();
   displayProject(project.name, project.id);
+  closeNewProjectForm();
+  showProjectContent(project.name);
 }
 
 function displayProject(name, id) {
@@ -84,8 +88,6 @@ function displayProject(name, id) {
   projectsList.appendChild(newProject);
 
   newProject.addEventListener('click', () => showProjectContent(name));
-
-  closeNewProjectForm();
 }
 
 function closeNewProjectForm() {
@@ -93,14 +95,7 @@ function closeNewProjectForm() {
   let resetBtn = document.querySelector('.resetNewProjectForm');
   projectContainer.classList.add('hidden');
   resetBtn.click();
-}
-
-function saveProjects() {
-  window.localStorage.setItem("projects", JSON.stringify(projects));
-}
-
-function saveProjectID() {
-  window.localStorage.setItem("projectID", projectID);
+  document.body.removeChild(projectContainer);
 }
 
 function loadProjects(array) {
@@ -118,6 +113,7 @@ function clearAndReloadProjects(array) {
 }
 
 function showProjectEditForm(name) {
+  document.body.appendChild(createProjectEditForm());
   let projectEditContainer = document.querySelector('.projectEditContainer');
   let projectNameEdit = document.querySelector('#projectNameEdit');
   projectNameEdit.setAttribute('value', `${name}`);
@@ -141,7 +137,7 @@ function submitEditForm() {
   projectNameEdit.addEventListener('keypress', function(event) {
     if (event.key === "Enter") {
       event.preventDefault();
-      confirmChange;
+      editSubmitBtn.click();
     }
   });
 
@@ -158,13 +154,19 @@ function submitEditForm() {
 
 function confirmChange() {
   let currentName = document.querySelector('.currentProjectName').textContent;
-
-  console.log(currentName);
-
   let newProjectName = document.querySelector('#projectNameEdit').value;
 
-  if (currentName === newProjectName) {
+  if (currentName === newProjectName || newProjectName === "") {
     closeProjectEditForm();
+  } else if (projects.some(x => x.name === newProjectName)) {
+    alert("That project name already exists, please choose another!");
+  } else {
+    let index = projects.findIndex(x => x.name === currentName);
+    projects[index].name = newProjectName;
+    saveProjects();
+    closeProjectEditForm();
+    clearAndReloadProjects(projects);
+    showProjectContent(newProjectName);
   }
 }
 
@@ -173,12 +175,29 @@ function closeProjectEditForm() {
   let resetBtn = document.querySelector('.resetEditProjectForm');
   projectEditContainer.classList.add('hidden');
   resetBtn.click();
+  document.body.removeChild(projectEditContainer);
 }
 
 function deleteProject(name) {
+  if (confirm("Are you sure you want to delete this project?")) {
+    let currentName = document.querySelector('.currentProjectName').textContent;
+    let index = projects.findIndex(x => x.name === currentName);
+    projects.splice(index, 1);
+    saveProjects();
+    closeProjectEditForm();
+    clearAndReloadProjects(projects);
+    showDefaultContent("Home");
+  } else {
+    return;
+  }
+}
 
+function saveProjects() {
+  window.localStorage.setItem("projects", JSON.stringify(projects));
+}
 
-  showDefaultContent("Home");
+function saveProjectID() {
+  window.localStorage.setItem("projectID", projectID);
 }
 
 export {
