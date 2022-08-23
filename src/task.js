@@ -1,3 +1,5 @@
+import {createNewTaskForm} from './initLoad';
+
 class Task {
   constructor (title, description, dueDate, priority, project, id) {
     this.title = title;
@@ -7,4 +9,12 @@ class Task {
     this.project = project;
     this.id = id;
   }
+}
+
+function showNewTaskForm() {
+  document.body.appendChild(createNewTaskForm());
+}
+
+export {
+  showNewTaskForm,
 }

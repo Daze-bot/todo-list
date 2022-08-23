@@ -1,6 +1,8 @@
 import Edit from './imgs/edit.svg';
+import Add from './imgs/add.svg';
 import {projects} from './project';
 import {showProjectEditForm} from './project';
+import {showNewTaskForm} from './task';
 
 function showProjectContent(projectName) {
   let content = document.querySelector('.content');
@@ -22,6 +24,7 @@ function showProjectContent(projectName) {
   editBtn.addEventListener('click', () => showProjectEditForm(projectName));
 
   content.appendChild(contentHead);
+  content.appendChild(createAddTaskButton());
   contentHead.appendChild(projectTitle);
   contentHead.appendChild(editBtn);
 
@@ -56,6 +59,22 @@ function highlightSelectedProject() {
       li.classList.add('selected');
     }
   });
+}
+
+function createAddTaskButton() {
+  let addBtn = document.createElement('button');
+  addBtn.classList.add('addTaskBtn');
+  addBtn.textContent = "Add Task";
+
+  let addImg = document.createElement('img');
+  addImg.setAttribute('src', `${Add}`);
+  addImg.setAttribute('alt', "Add Task");
+
+  addBtn.appendChild(addImg);
+
+  addBtn.addEventListener('click', showNewTaskForm);
+
+  return addBtn;
 }
 
 export {

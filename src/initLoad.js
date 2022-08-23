@@ -229,6 +229,137 @@ function createProjectEditForm() {
   return projectEditDiv;
 }
 
+function createNewTaskForm() {
+  let newTaskDiv = document.createElement('div');
+  newTaskDiv.classList.add('newTaskContainer');
+
+  let newTaskForm = document.createElement('form');
+  newTaskForm.classList.add('newTaskForm');
+  newTaskForm.setAttribute('action', "");
+  newTaskForm.setAttribute('autocomplete', 'off');
+
+  let closeImg = document.createElement('img');
+  closeImg.classList.add('closeBtn', 'newTaskClose');
+  closeImg.setAttribute('src', `${Close}`);
+  closeImg.setAttribute('alt', 'Close');
+
+  let formHeader = document.createElement('p');
+  formHeader.classList.add('newTaskHeader');
+  formHeader.textContent = "New Task";
+
+  newTaskDiv.appendChild(newTaskForm);
+  newTaskForm.appendChild(closeImg);
+  newTaskForm.appendChild(formHeader);
+
+  //task title
+
+  let inputDivTitle = document.createElement('div');
+  inputDivTitle.classList.add('textInput', 'entry');
+
+  let formLabelTitle = document.createElement('label');
+  formLabelTitle.setAttribute('for', 'newTaskName');
+  formLabelTitle.textContent = "Task Name:";
+
+  let formInputTitle = document.createElement('input');
+  formInputTitle.setAttribute('type', 'text');
+  formInputTitle.setAttribute('name', 'newTaskName');
+  formInputTitle.setAttribute('id', 'newTaskName');
+  formInputTitle.setAttribute('required', "");
+
+  inputDivTitle.appendChild(formLabelTitle);
+  inputDivTitle.appendChild(formInputTitle);
+
+  newTaskForm.appendChild(inputDivTitle);
+
+  //task description
+
+  let inputDivDescription = document.createElement('div');
+  inputDivDescription.classList.add('textAreaInput', 'entry');
+
+  let formLabelDescription = document.createElement('label');
+  formLabelDescription.setAttribute('for', 'newTaskDescription');
+  formLabelDescription.textContent = "Task Description:";
+
+  let formInputDescription = document.createElement('textarea')
+  formInputDescription.setAttribute('rows', '10');
+  formInputDescription.setAttribute('name', 'newTaskDescription');
+  formInputDescription.setAttribute('id', 'newTaskDescription');
+
+  inputDivDescription.appendChild(formLabelDescription);
+  inputDivDescription.appendChild(formInputDescription);
+
+  newTaskForm.appendChild(inputDivDescription);
+
+  //task due date
+
+  let inputDivDate = document.createElement('div');
+  inputDivDate.classList.add('dateInput', 'entry');
+
+  let formLabelDate = document.createElement('label');
+  formLabelDate.setAttribute('for', 'newTaskDate');
+  formLabelDate.textContent = "Due Date:";
+
+  let formInputDate = document.createElement('input');
+  formInputDate.setAttribute('type', 'date');
+  formInputDate.setAttribute('name', 'newTaskDate');
+  formInputDate.setAttribute('id', 'newTaskDate');
+
+  inputDivDate.appendChild(formLabelDate);
+  inputDivDate.appendChild(formInputDate);
+
+  newTaskForm.appendChild(inputDivDate);
+
+  //task priority
+
+  let inputDivPriority = document.createElement('div');
+  inputDivPriority.classList.add('selectInput', 'entry');
+
+  let formLabelPriority = document.createElement('p');
+  formLabelPriority.textContent = "Set Priority:";
+
+  let formInputPriority = document.createElement('select');
+  formInputPriority.setAttribute('name', 'newTaskPriority');
+  formInputPriority.setAttribute('id', 'newTaskPriority');
+
+  let lowPrio = document.createElement('option');
+  lowPrio.setAttribute('value', 'low');
+  lowPrio.textContent = "Low";
+
+  let normalPrio = document.createElement('option');
+  normalPrio.setAttribute('value', 'normal');
+  normalPrio.setAttribute('selected', '');
+  normalPrio.textContent = "Normal";
+
+  let highPrio = document.createElement('option');
+  highPrio.setAttribute('value', 'high');
+  highPrio.textContent = "High";
+
+  formInputPriority.appendChild(lowPrio);
+  formInputPriority.appendChild(normalPrio);
+  formInputPriority.appendChild(highPrio);
+
+  inputDivPriority.appendChild(formLabelPriority);
+  inputDivPriority.appendChild(formInputPriority);
+
+  newTaskForm.appendChild(inputDivPriority);
+
+  //buttons
+
+  let submitBtn = document.createElement('button');
+  submitBtn.classList.add('submitNewTask');
+  submitBtn.textContent = "Create Task";
+  submitBtn.setAttribute('type', 'button');
+
+  let resetBtn = document.createElement('button');
+  resetBtn.classList.add('resetNewTaskForm', 'hidden');
+  resetBtn.setAttribute('type', 'reset');
+
+  newTaskForm.appendChild(submitBtn);
+  newTaskForm.appendChild(resetBtn);
+
+  return newTaskDiv;
+}
+
 export {
   createHeader,
   createSidebar,
@@ -236,4 +367,5 @@ export {
   createFooter,
   createNewProjectForm,
   createProjectEditForm,
+  createNewTaskForm,
 }

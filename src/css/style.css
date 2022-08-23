@@ -139,6 +139,10 @@ header {
   overflow-y: auto;
   max-height: calc(100vh - 130px);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
 .contentHead {
@@ -164,8 +168,32 @@ header {
   scale: 1.2;
 }
 
+.addTaskBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  padding: 5px 15px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--header-bg-color);
+  color: var(--header-text-color);
+}
+
+.addTaskBtn:hover {
+  cursor: pointer;
+  box-shadow: 0 6px 10px var(--shadow-color);
+}
+
+.addTaskBtn img {
+  filter: var(--change-white-filter);
+}
+
 .newProjectContainer,
-.projectEditContainer {
+.projectEditContainer,
+.newTaskContainer {
   position: fixed;
   height: 100%;
   width: 100%;
@@ -176,12 +204,14 @@ header {
   align-items: center;
 }
 
-.projectEditContainer {
+.projectEditContainer,
+.newTaskContainer {
   padding-left: 280px;
 }
 
 .newProjectForm,
-.editProjectForm {
+.editProjectForm,
+.newTaskForm {
   background-color: var(--sidebar-bg-color);
   color: var(--primary-text-color);
   padding: 40px 80px;
@@ -195,7 +225,8 @@ header {
 }
 
 .newProjectForm p,
-.editProjectForm p {
+.editProjectForm p,
+.newTaskHeader {
   font-weight: 700;
   font-size: 1.7rem;
 }
@@ -205,7 +236,10 @@ header {
 }
 
 .entry input,
-.entry label {
+.entry label,
+.entry textarea,
+.entry select,
+.entry p {
   display: block;
   width: 100%;
   font-size: 1.2rem;
@@ -215,18 +249,24 @@ header {
   margin-bottom: 4px;
 }
 
-.entry input {
+.entry input,
+.entry textarea,
+.entry select {
   outline: none;
   padding: 4px 8px;
   border: none;
   border-radius: 4px;
+  background-color: white;
 }
 
-.entry input:hover {
+.entry input:hover,
+.entry textarea:hover,
+.entry select:hover {
   box-shadow: 0 0 8px var(--shadow-color);
 }
 
-.entry input:focus {
+.entry input:focus,
+.entry textarea:focus {
   box-shadow: 0 0 8px var(--dark-shadow-color);
 }
 
@@ -236,7 +276,8 @@ header {
 }
 
 .submitNewProject,
-.submitProjectChange {
+.submitProjectChange,
+.submitNewTask {
   padding: 10px 30px;
   font-size: 1.3rem;
   font-weight: 700;
@@ -258,6 +299,7 @@ header {
 
 .submitNewProject:hover,
 .submitProjectChange:hover,
+.submitNewTask:hover,
 .deleteProject:hover {
   box-shadow: 0 2px 10px var(--shadow-color);
   cursor: pointer;
@@ -265,7 +307,9 @@ header {
 
 .submitNewProject:active,
 .submitProjectChange:active,
-.deleteProject:active {
+.submitNewTask:active,
+.deleteProject:active,
+.addTaskBtn:active {
   box-shadow: none;
   transform: translateY(2px);
 }
