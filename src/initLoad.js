@@ -281,7 +281,8 @@ function createNewTaskForm() {
   formLabelDescription.textContent = "Task Description:";
 
   let formInputDescription = document.createElement('textarea')
-  formInputDescription.setAttribute('rows', '10');
+  formInputDescription.setAttribute('rows', '5');
+  formInputDescription.setAttribute('cols', '30');
   formInputDescription.setAttribute('name', 'newTaskDescription');
   formInputDescription.setAttribute('id', 'newTaskDescription');
 
