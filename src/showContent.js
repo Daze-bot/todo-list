@@ -1,10 +1,10 @@
 import Edit from './imgs/edit.svg';
 import Add from './imgs/add.svg';
-import Close from './imgs/close.svg';
+import Trash from './imgs/trash.svg';
+import Check from './imgs/check.svg';
 import {projects} from './project';
-import {tasks} from './task';
 import {showProjectEditForm} from './project';
-import {showNewTaskForm} from './task';
+import {showNewTaskForm, markTaskComplete, tasks} from './task';
 
 function showProjectContent(projectName) {
   let content = document.querySelector('.content');
@@ -22,7 +22,7 @@ function showProjectContent(projectName) {
   let editBtn = document.createElement('img');
   editBtn.classList.add('editBtn');
   editBtn.setAttribute('src', `${Edit}`);
-  editBtn.setAttribute('alt', "Home");
+  editBtn.setAttribute('alt', "Edit");
   editBtn.addEventListener('click', () => showProjectEditForm(projectName));
 
   let taskContainer = document.createElement('div');
@@ -96,31 +96,86 @@ function displayTask(task) {
   taskCard.classList.add('taskCard');
   taskCard.dataset.id = task.id;
 
+  if (task.priority === "low") {
+    taskCard.classList.add('lowPrio');
+  } else if (task.priority === "high") {
+    taskCard.classList.add('highPrio');
+  } else if (task.priority === "normal") {
+    taskCard.classList.add('normPrio');
+  }
+
+  let checkComplete = document.createElement('button');
+  checkComplete.classList.add('markComplete');
+  checkComplete.addEventListener('click', markTaskComplete);
+
+  let checkMark = document.createElement('img');
+  checkMark.classList.add('checkMark');
+  checkMark.setAttribute('src', `${Check}`);
+  checkMark.setAttribute('alt', "Check");
+
+  if (task.complete === true) {
+    taskCard.classList.add('taskCompleteStatus');
+  } else if (task.complete === false) {
+    checkMark.classList.add('hidden');
+  }
+
+  checkComplete.appendChild(checkMark);
+
   let name = document.createElement('p');
+  name.classList.add('taskTitle');
   name.textContent = task.title;
 
+  let details = document.createElement('div');
+  details.classList.add('taskDescriptionView', 'hidden');
+  details.textContent = task.description;
+
+  let detailsBtn = document.createElement('button');
+  detailsBtn.classList.add('taskDetails');
+  detailsBtn.textContent = "Details";
+  detailsBtn.addEventListener('click', () => {
+    if (details.classList.contains('hidden')) {
+      taskCard.classList.add('openDetails');
+      details.classList.remove('hidden');
+    } else if (!details.classList.contains('hidden')) {
+      taskCard.classList.remove('openDetails');
+      details.classList.add('hidden');
+    }
+  })
+
   let dueDate = document.createElement('p');
+  dueDate.classList.add('taskDueDateDisplay');
   let rawDate = task.dueDate;
   let year = rawDate.substring(0,4);
   let month = rawDate.substring(5,7);
   let day = rawDate.substring(8,10);
   let formattedDate = month + '/' + day + '/' + year;
-
   dueDate.textContent = formattedDate;
 
-  let closeImg = document.createElement('img');
-  closeImg.classList.add('closeBtn', 'editProjectClose');
-  closeImg.setAttribute('src', `${Close}`);
-  closeImg.setAttribute('alt', 'Close');
+  let taskButtons = document.createElement('div');
+  taskButtons.classList.add('taskBtns');
 
+  let editBtn = document.createElement('img');
+  editBtn.classList.add('taskEdit');
+  editBtn.setAttribute('src', `${Edit}`);
+  editBtn.setAttribute('alt', "Edit Task");
+
+  let closeImg = document.createElement('img');
+  closeImg.classList.add('taskClose');
+  closeImg.setAttribute('src', `${Trash}`);
+  closeImg.setAttribute('alt', 'Delete Task');
+
+  taskButtons.appendChild(editBtn);
+  taskButtons.appendChild(closeImg);
+
+  taskCard.appendChild(checkComplete);
   taskCard.appendChild(name);
+  taskCard.appendChild(details);
+  taskCard.appendChild(detailsBtn);
   taskCard.appendChild(dueDate);
-  taskCard.appendChild(closeImg);
+  taskCard.appendChild(taskButtons);
 
   let taskContainer = document.querySelector('.taskCardContainer');
   taskContainer.appendChild(taskCard);
-
-  /* taskCard.addEventListener('click', showTaskDescription); */
 }
 
 function loadTasks(projectName, array) {

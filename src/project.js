@@ -178,7 +178,7 @@ function closeProjectEditForm() {
 }
 
 function deleteProject(name) {
-  if (confirm("Are you sure you want to delete this project?")) {
+  if (confirm("Are you sure you want to delete this project? This will delete all associated tasks as well.")) {
     let currentName = document.querySelector('.currentProjectName').textContent;
     let index = projects.findIndex(x => x.name === currentName);
     projects.splice(index, 1);

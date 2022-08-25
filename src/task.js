@@ -1,5 +1,5 @@
 import {createNewTaskForm} from './initLoad';
-import {displayTask, showProjectContent} from './showContent';
+import {displayTask} from './showContent';
 
 let tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
 let taskID = +localStorage.getItem("taskID") || 0;
@@ -80,6 +80,20 @@ function closeNewTaskForm() {
   document.body.removeChild(taskContainer);
 }
 
+function markTaskComplete() {
+  let taskDataID = +this.parentElement.dataset.id;
+  let index = tasks.findIndex(x => x.id === taskDataID);
+  if (tasks[index].complete === false) {
+    tasks[index].complete = true;
+    this.parentElement.classList.add('taskCompleteStatus');
+    this.firstChild.classList.remove('hidden');
+  } else if (tasks[index].complete === true) {
+    tasks[index].complete = false;
+    this.parentElement.classList.remove('taskCompleteStatus');
+    this.firstChild.classList.add('hidden');
+  }
+  saveTasks();
+}
 
 function saveTasks() {
   window.localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -92,4 +106,5 @@ function saveTaskID() {
 export {
   showNewTaskForm,
   tasks,
+  markTaskComplete,
 }

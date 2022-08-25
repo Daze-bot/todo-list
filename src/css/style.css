@@ -191,6 +191,129 @@ header {
   filter: var(--change-white-filter);
 }
 
+.taskCardContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 30px;
+  width: 100%;
+}
+
+.taskCard {
+  display: flex;
+  align-items: center;
+  gap: 5%;
+  width: 100%;
+  padding: 5px 15px;
+  background-color: var(--sidebar-bg-color);
+  border-radius: 8px;
+  position: relative;
+}
+
+.openDetails {
+  margin-bottom: 150px;
+}
+
+.taskDescriptionView {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  width: 100%;
+  height: 154px;
+  border: 2px solid var(--sidebar-bg-color);
+  border-top: none;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.lowPrio {
+  background: linear-gradient(to right, #a5dda5, #a5dda5 4px, var(--sidebar-bg-color) 4px);
+}
+
+.normPrio {
+  background: linear-gradient(to right, var(--header-bg-color), var(--header-bg-color) 4px, var(--sidebar-bg-color) 4px);
+}
+
+.highPrio {
+  background: linear-gradient(to right, red, red 4px, var(--sidebar-bg-color) 4px);
+}
+
+.taskCompleteStatus {
+  opacity: 40%;
+  position: relative;
+}
+
+.taskCompleteStatus::after {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.4);
+  content: "";
+  width: 100%;
+  display: block;
+}
+
+.markComplete {
+  height: 20px;
+  min-width: 20px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 2px;
+  position: relative;
+}
+
+.markComplete:hover {
+  cursor: pointer;
+  box-shadow: inset 0 0 6px var(--shadow-color);
+}
+
+.checkMark {
+  position: absolute;
+  top: -3px;
+  left: -3.5px;
+}
+
+.taskTitle {
+  margin-right: auto;
+  font-weight: 700;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  min-width: 55px;
+}
+
+.taskDetails {
+  padding: 4px 25px;
+  background-color: var(--header-bg-color);
+  color: var(--header-text-color);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.taskDetails:hover {
+  box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.taskDetails:active {
+  box-shadow: none;
+}
+
+.taskDueDateDisplay {
+  min-width: 85px;
+  text-align: center;
+}
+
+.taskBtns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
 .newProjectContainer,
 .projectEditContainer,
 .newTaskContainer {
@@ -321,8 +444,15 @@ header {
   filter: var(--color-change-filter1);
 }
 
-.closeBtn:hover {
+.closeBtn:hover,
+.taskClose:hover,
+.taskEdit:hover {
   cursor: pointer;
+}
+
+.taskClose,
+.taskEdit {
+  filter: var(--color-change-filter1);
 }
 
 footer {

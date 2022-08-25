@@ -140,6 +140,7 @@ function createNewProjectForm() {
   formInput.setAttribute('type', 'text');
   formInput.setAttribute('name', 'projectNameInput');
   formInput.setAttribute('id', 'projectNameInput');
+  formInput.setAttribute('maxlength', '16');
   formInput.setAttribute('required', "");
 
   let submitBtn = document.createElement('button');
@@ -193,6 +194,7 @@ function createProjectEditForm() {
   formInput.setAttribute('type', 'text');
   formInput.setAttribute('name', 'projectNameEdit');
   formInput.setAttribute('id', 'projectNameEdit');
+  formInput.setAttribute('maxlength', '16');
   formInput.setAttribute('required', "");
 
   let buttonDiv = document.createElement('div');
@@ -264,6 +266,7 @@ function createNewTaskForm() {
   formInputTitle.setAttribute('type', 'text');
   formInputTitle.setAttribute('name', 'newTaskName');
   formInputTitle.setAttribute('id', 'newTaskName');
+  formInputTitle.setAttribute('maxlength', '27');
   formInputTitle.setAttribute('required', "");
 
   inputDivTitle.appendChild(formLabelTitle);
