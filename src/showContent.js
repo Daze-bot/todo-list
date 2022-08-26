@@ -4,7 +4,7 @@ import Trash from './imgs/trash.svg';
 import Check from './imgs/check.svg';
 import {projects} from './project';
 import {showProjectEditForm} from './project';
-import {showNewTaskForm, markTaskComplete, tasks} from './task';
+import {showNewTaskForm, markTaskComplete, tasks, deleteTask, showTaskEditForm} from './task';
 import {getWeekDates} from './date';
 
 function showProjectContent(projectName) {
@@ -179,11 +179,23 @@ function displayTask(task) {
   editBtn.classList.add('taskEdit');
   editBtn.setAttribute('src', `${Edit}`);
   editBtn.setAttribute('alt', "Edit Task");
+  editBtn.addEventListener('click', () => {
+    showTaskEditForm(task);
+  })
 
   let closeImg = document.createElement('img');
   closeImg.classList.add('taskClose');
   closeImg.setAttribute('src', `${Trash}`);
   closeImg.setAttribute('alt', 'Delete Task');
+  closeImg.addEventListener('click', () => {
+    deleteTask(task);
+    let contentName = document.querySelector('.contentHead').textContent;
+    if (contentName !== task.project) {
+      showDefaultContent(contentName);
+    } else {
+      showProjectContent(task.project);
+    }
+  });
 
   taskButtons.appendChild(editBtn);
   taskButtons.appendChild(closeImg);

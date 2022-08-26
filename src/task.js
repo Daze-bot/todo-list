@@ -1,5 +1,5 @@
 import {createNewTaskForm} from './initLoad';
-import {displayTask} from './showContent';
+import {displayTask, showDefaultContent, showProjectContent} from './showContent';
 
 let tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
 let taskID = +localStorage.getItem("taskID") || 0;
@@ -95,6 +95,88 @@ function markTaskComplete() {
   saveTasks();
 }
 
+function showTaskEditForm(task) {
+  document.body.appendChild(createNewTaskForm());
+  let taskHead = document.querySelector('.newTaskHeader');
+  taskHead.textContent = "Edit Task";
+
+  let buttonName = document.querySelector('.submitNewTask');
+  buttonName.textContent = "Edit Task";
+
+  let taskName = document.querySelector('#newTaskName');
+  taskName.setAttribute('value', task.title);
+
+  let taskDescription = document.querySelector('#newTaskDescription');
+  taskDescription.value = `${task.description}`;
+
+  let taskDate = document.querySelector('#newTaskDate');
+  taskDate.setAttribute('value', task.dueDate);
+
+  let taskPrio = document.querySelector('#newTaskPriority');
+  taskPrio.value = `${task.priority}`;
+
+  submitTaskEdit(task);
+}
+
+function submitTaskEdit(task) {
+  let taskSubmitBtn = document.querySelector('.submitNewTask');
+  taskSubmitBtn.addEventListener('click', () => editTask(task));
+
+  let taskCloseBtn = document.querySelector('.newTaskClose');
+  taskCloseBtn.addEventListener('click', closeNewTaskForm);
+
+  let taskNameInput = document.querySelector('#newTaskName');
+  taskNameInput.addEventListener('keypress', function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      editTask(task);
+    }
+  });
+
+  let taskForm = document.querySelector('.newTaskForm');
+  let taskContainer = document.querySelector('.newTaskContainer');
+  taskContainer.addEventListener('click', function(e) {
+    if (taskForm.contains(e.target)) {
+      return;
+    } else {
+      closeNewTaskForm();
+    }
+  });
+}
+
+function editTask(task) {
+  let taskName = document.querySelector('#newTaskName').value;
+  let taskDescription = document.querySelector('#newTaskDescription').value;
+  let taskDueDate = document.querySelector('#newTaskDate').value;
+  let taskPriority = document.querySelector('#newTaskPriority').value;
+
+  if (taskName !== "") {
+    task.title = taskName;
+  }
+  task.description = taskDescription;
+  task.dueDate = taskDueDate;
+  task.priority = taskPriority;
+
+  saveTasks();
+  closeNewTaskForm();
+  let contentName = document.querySelector('.contentHead').textContent;
+    if (contentName !== task.project) {
+      showDefaultContent(contentName);
+    } else {
+      showProjectContent(task.project);
+    }
+}
+
+function deleteTask(task) {
+  if (confirm("Are you sure you want to delete this task?")) {
+    let index = tasks.findIndex(x => x.id === task.id);
+    tasks.splice(index, 1);
+    saveTasks();
+  } else {
+    return;
+  }
+}
+
 function deleteTasksInProject(projectName) {
   let filteredArray = tasks.filter(x => x.project !== projectName);
   tasks = filteredArray;
@@ -124,4 +206,6 @@ export {
   markTaskComplete,
   deleteTasksInProject,
   changeTaskProjects,
+  deleteTask,
+  showTaskEditForm,
 }

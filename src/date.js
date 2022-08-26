@@ -5,14 +5,10 @@ function getWeekDates() {
   let upcomingWeek = [];
 
   for (let i = 0; i < 7; i++) {
-    weekDates.push(moment().add(i, 'd'));
+    weekDates.push(moment().add(i, 'd').format());
   }
 
-  weekDates.forEach(function(date) {
-    upcomingWeek.push(date.format());
-  });
-
-  upcomingWeek = upcomingWeek.map(x => x.substring(0, 10));
+  upcomingWeek = weekDates.map(x => x.substring(0, 10));
 
   return upcomingWeek;
 }

@@ -486,6 +486,15 @@ header {
   filter: var(--color-change-filter1);
 }
 
+.taskClose:hover {
+  animation: shake .6s;
+  animation-iteration-count: 1;
+}
+
+.taskEdit:hover {
+  scale: 1.1;
+}
+
 footer {
   grid-area: 3/1/4/3;
   text-align: center;
@@ -513,4 +522,13 @@ footer a:hover {
 
 .hidden {
   display: none;
+}
+
+@keyframes shake {
+  15%, 45%, 75% {
+    transform: translate3d(-.5px, 0, 0) rotate(4deg);
+  }
+  30%, 60%, 90% {
+    transform: translate3d(.5px, 0, 0) rotate(-4deg);
+  }
 }
