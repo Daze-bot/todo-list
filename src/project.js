@@ -1,6 +1,7 @@
 import Folder from './imgs/folder.svg';
 import {showProjectContent, showDefaultContent} from './showContent.js';
 import {createProjectEditForm, createNewProjectForm} from './initLoad';
+import {deleteTasksInProject, changeTaskProjects} from './task';
 
 let projects = JSON.parse(localStorage.getItem("projects") || "[]");
 let projectID = +localStorage.getItem("projectID") || 0;
@@ -50,8 +51,8 @@ function submitProjectForm() {
 function createProject() {
   let projectName = document.querySelector('#projectNameInput').value;
 
-  if (projects.some(x => x.name === projectName)) {
-    alert("That project name already exists, please choose another!");
+  if (projects.some(x => x.name === projectName) || projectName === "Home" || projectName === "Today" || projectName === "This Week") {
+    alert("That name already exists, please choose another!");
   } else {
     if (projectName !== "") {
       projectID += 1;
@@ -153,17 +154,21 @@ function submitEditForm() {
 
 function confirmChange() {
   let currentName = document.querySelector('.currentProjectName').textContent;
+  let projectNameEdit = document.querySelector('#projectNameEdit');
   let newProjectName = document.querySelector('#projectNameEdit').value;
 
   if (currentName === newProjectName || newProjectName === "") {
     closeProjectEditForm();
-  } else if (projects.some(x => x.name === newProjectName)) {
-    alert("That project name already exists, please choose another!");
+  } else if (projects.some(x => x.name === newProjectName) || newProjectName ===    "Home" || newProjectName === "Today" || newProjectName === "This Week") {
+    alert("That name already exists, please choose another!");
+    projectNameEdit.focus();
+    projectNameEdit.select();
   } else {
     let index = projects.findIndex(x => x.name === currentName);
     projects[index].name = newProjectName;
     saveProjects();
     closeProjectEditForm();
+    changeTaskProjects(currentName, newProjectName);
     clearAndReloadProjects(projects);
     showProjectContent(newProjectName);
   }
@@ -177,13 +182,14 @@ function closeProjectEditForm() {
   document.body.removeChild(projectEditContainer);
 }
 
-function deleteProject(name) {
+function deleteProject() {
   if (confirm("Are you sure you want to delete this project? This will delete all associated tasks as well.")) {
     let currentName = document.querySelector('.currentProjectName').textContent;
     let index = projects.findIndex(x => x.name === currentName);
     projects.splice(index, 1);
     saveProjects();
     closeProjectEditForm();
+    deleteTasksInProject(currentName);
     clearAndReloadProjects(projects);
     showDefaultContent("Home");
   } else {

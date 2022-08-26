@@ -5,6 +5,7 @@ import Check from './imgs/check.svg';
 import {projects} from './project';
 import {showProjectEditForm} from './project';
 import {showNewTaskForm, markTaskComplete, tasks} from './task';
+import {getWeekDates} from './date';
 
 function showProjectContent(projectName) {
   let content = document.querySelector('.content');
@@ -33,6 +34,7 @@ function showProjectContent(projectName) {
   contentHead.appendChild(editBtn);
   content.appendChild(createAddTaskButton());
   content.appendChild(taskContainer);
+  taskContainer.appendChild(showTaskLegend());
 
   highlightSelectedProject();
 
@@ -57,6 +59,7 @@ function showDefaultContent(name) {
   content.appendChild(contentHead);
   contentHead.appendChild(projectTitle);
   content.appendChild(taskContainer);
+  taskContainer.appendChild(showTaskLegend());
 
   highlightSelectedProject();
 
@@ -73,6 +76,24 @@ function highlightSelectedProject() {
       li.classList.add('selected');
     }
   });
+}
+
+function showTaskLegend() {
+  let legend = document.createElement('div');
+  legend.classList.add('taskLegend');
+
+  let name = document.createElement('p');
+  name.classList.add('legendName');
+  name.textContent = "Name";
+
+  let date = document.createElement('p');
+  date.classList.add('legendDate');
+  date.textContent = "Due Date";
+
+  legend.appendChild(name);
+  legend.appendChild(date);
+
+  return legend;
 }
 
 function createAddTaskButton() {
@@ -192,7 +213,8 @@ function loadTasks(projectName, array) {
     
     newArray = array.filter(x => x.dueDate === today);
   } else if (projectName === "This Week") {
-    //
+    let thisWeek = getWeekDates();
+    newArray = array.filter(x => thisWeek.includes(x.dueDate));
   } else {
     newArray = array.filter(x => x.project === projectName);
   }

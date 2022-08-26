@@ -95,6 +95,21 @@ function markTaskComplete() {
   saveTasks();
 }
 
+function deleteTasksInProject(projectName) {
+  let filteredArray = tasks.filter(x => x.project !== projectName);
+  tasks = filteredArray;
+  saveTasks();
+}
+
+function changeTaskProjects(oldName, newName) {
+  tasks.forEach(x => {
+    if (x.project === oldName) {
+      x.project = newName;
+    }
+  })
+  saveTasks();
+}
+
 function saveTasks() {
   window.localStorage.setItem("tasks", JSON.stringify(tasks));
 }
@@ -107,4 +122,6 @@ export {
   showNewTaskForm,
   tasks,
   markTaskComplete,
+  deleteTasksInProject,
+  changeTaskProjects,
 }
