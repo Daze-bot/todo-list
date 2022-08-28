@@ -4,14 +4,13 @@ import Trash from './imgs/trash.svg';
 import Check from './imgs/check.svg';
 import {projects} from './project';
 import {showProjectEditForm} from './project';
-import {showNewTaskForm, markTaskComplete, tasks, deleteTask, showTaskEditForm} from './task';
+import {showNewTaskForm, markTaskComplete, tasks, deleteTask, showTaskEditForm, sortTasks} from './task';
 import {getWeekDates} from './date';
 
 function showProjectContent(projectName) {
+  clearContent();
+
   let content = document.querySelector('.content');
-  while (content.hasChildNodes()) {
-    content.removeChild(content.lastChild);
-  }
 
   let contentHead = document.createElement('div');
   contentHead.classList.add('contentHead');
@@ -42,10 +41,9 @@ function showProjectContent(projectName) {
 }
 
 function showDefaultContent(name) {
+  clearContent();
+
   let content = document.querySelector('.content');
-  while (content.hasChildNodes()) {
-    content.removeChild(content.lastChild);
-  }
 
   let contentHead = document.createElement('div');
   contentHead.classList.add('contentHead');
@@ -64,6 +62,20 @@ function showDefaultContent(name) {
   highlightSelectedProject();
 
   loadTasks(name, tasks);
+}
+
+function clearContent() {
+  let content = document.querySelector('.content');
+  while (content.hasChildNodes()) {
+    content.removeChild(content.lastChild);
+  }
+}
+
+function clearTasks() {
+  let taskContainer = document.querySelector('.taskCardContainer');
+  while (taskContainer.childNodes.length > 1) {
+    taskContainer.removeChild(taskContainer.lastChild);
+  }
 }
 
 function highlightSelectedProject() {
@@ -85,10 +97,12 @@ function showTaskLegend() {
   let name = document.createElement('p');
   name.classList.add('legendName');
   name.textContent = "Name";
+  name.addEventListener('click', () => sortTasks("name"));
 
   let date = document.createElement('p');
   date.classList.add('legendDate');
   date.textContent = "Due Date";
+  date.addEventListener('click', () => sortTasks("date"));
 
   legend.appendChild(name);
   legend.appendChild(date);
@@ -240,4 +254,7 @@ export {
   showProjectContent,
   showDefaultContent,
   displayTask,
+  clearContent,
+  loadTasks,
+  clearTasks,
 }

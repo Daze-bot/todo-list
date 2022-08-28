@@ -1,5 +1,5 @@
 import {createNewTaskForm} from './initLoad';
-import {displayTask, showDefaultContent, showProjectContent} from './showContent';
+import {displayTask, showDefaultContent, showProjectContent, clearTasks, loadTasks} from './showContent';
 
 let tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
 let taskID = +localStorage.getItem("taskID") || 0;
@@ -192,6 +192,40 @@ function changeTaskProjects(oldName, newName) {
   saveTasks();
 }
 
+function sortTasks(sortChoice) {
+  let projectName = document.querySelector('.contentHead').textContent;
+  let legendName = document.querySelector('.legendName');
+  let legendDate = document.querySelector('.legendDate');
+
+  clearTasks();
+
+  if (sortChoice === "name" && !legendName.classList.contains('aToZ')) {
+    let sortedArray = tasks.sort((a, b) => {
+      return (a.title.toUpperCase() > b.title.toUpperCase()) ? 1 : -1;
+    })
+    loadTasks(projectName, sortedArray);
+    legendName.classList.add('aToZ');
+  } else if (sortChoice === "name") {
+    let sortedArray = tasks.sort((a, b) => {
+      return (a.title.toUpperCase() > b.title.toUpperCase()) ? -1 : 1;
+    })
+    loadTasks(projectName, sortedArray);
+    legendName.classList.remove('aToZ');
+  } else if (sortChoice === "date" && !legendDate.classList.contains('newToOld')) {
+    let sortedArray = tasks.sort((a, b) => {
+      return (a.dueDate > b.dueDate) ? 1 : -1;
+    })
+    loadTasks(projectName, sortedArray);
+    legendDate.classList.add('newToOld');
+  } else if (sortChoice === "date") {
+    let sortedArray = tasks.sort((a, b) => {
+      return (a.dueDate > b.dueDate) ? -1 : 1;
+    })
+    loadTasks(projectName, sortedArray);
+    legendDate.classList.remove('newToOld');
+  }
+}
+
 function saveTasks() {
   window.localStorage.setItem("tasks", JSON.stringify(tasks));
 }
@@ -208,4 +242,5 @@ export {
   changeTaskProjects,
   deleteTask,
   showTaskEditForm,
+  sortTasks,
 }
