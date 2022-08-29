@@ -61,7 +61,7 @@ function createTask() {
     let newTask = new Task(taskName, taskDescription, taskDueDate, taskPriority, currentProject, false, taskID);
     addTask(newTask);
   } else {
-    closeNewTaskForm();
+    alert("Please enter a task name.");
   }
 }
 
@@ -205,24 +205,35 @@ function sortTasks(sortChoice) {
     })
     loadTasks(projectName, sortedArray);
     legendName.classList.add('aToZ');
+    legendDate.classList.remove('newToOld');
   } else if (sortChoice === "name") {
     let sortedArray = tasks.sort((a, b) => {
       return (a.title.toUpperCase() > b.title.toUpperCase()) ? -1 : 1;
     })
     loadTasks(projectName, sortedArray);
     legendName.classList.remove('aToZ');
+    legendDate.classList.remove('newToOld');
   } else if (sortChoice === "date" && !legendDate.classList.contains('newToOld')) {
     let sortedArray = tasks.sort((a, b) => {
       return (a.dueDate > b.dueDate) ? 1 : -1;
     })
     loadTasks(projectName, sortedArray);
     legendDate.classList.add('newToOld');
+    legendName.classList.remove('aToZ');
   } else if (sortChoice === "date") {
     let sortedArray = tasks.sort((a, b) => {
       return (a.dueDate > b.dueDate) ? -1 : 1;
     })
     loadTasks(projectName, sortedArray);
     legendDate.classList.remove('newToOld');
+    legendName.classList.remove('aToZ');
+  } else if (sortChoice === "id") {
+    let sortedArray = tasks.sort((a, b) => {
+      return (a.id > b.id) ? 1 : -1;
+    })
+    loadTasks(projectName, sortedArray);
+    legendDate.classList.remove('newToOld');
+    legendName.classList.remove('aToZ');
   }
 }
 

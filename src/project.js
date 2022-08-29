@@ -160,7 +160,7 @@ function confirmChange() {
   if (currentName === newProjectName || newProjectName === "") {
     closeProjectEditForm();
   } else if (projects.some(x => x.name === newProjectName) || newProjectName ===    "Home" || newProjectName === "Today" || newProjectName === "This Week") {
-    alert("That name already exists, please choose another!");
+    alert("That project name already exists, please choose another!");
     projectNameEdit.focus();
     projectNameEdit.select();
   } else {

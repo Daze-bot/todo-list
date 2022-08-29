@@ -2,9 +2,8 @@ import Edit from './imgs/edit.svg';
 import Add from './imgs/add.svg';
 import Trash from './imgs/trash.svg';
 import Check from './imgs/check.svg';
-import {projects} from './project';
 import {showProjectEditForm} from './project';
-import {showNewTaskForm, markTaskComplete, tasks, deleteTask, showTaskEditForm, sortTasks} from './task';
+import {showNewTaskForm, markTaskComplete, deleteTask, showTaskEditForm, sortTasks} from './task';
 import {getWeekDates} from './date';
 
 function showProjectContent(projectName) {
@@ -37,7 +36,7 @@ function showProjectContent(projectName) {
 
   highlightSelectedProject();
 
-  loadTasks(projectName, tasks);
+  sortTasks("id");
 }
 
 function showDefaultContent(name) {
@@ -61,7 +60,7 @@ function showDefaultContent(name) {
 
   highlightSelectedProject();
 
-  loadTasks(name, tasks);
+  sortTasks("id");
 }
 
 function clearContent() {
