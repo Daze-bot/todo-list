@@ -204,10 +204,10 @@ header {
 .taskLegend {
   display: flex;
   align-items: center;
- justify-content: space-between;
+  justify-content: space-between;
   width: 100%;
-  padding: 5px 15px;
-  padding-left: calc(5% + 35px);
+  padding: 5px 0px;
+  padding-left: calc(5% + 33.5px);
   padding-right: calc(5% + 78px);
   font-weight: 700;
   border-bottom: 1px solid var(--primary-text-color);
@@ -219,7 +219,6 @@ header {
   white-space: nowrap;
   text-overflow: ellipsis;
   min-width: 55px;
-  text-align: center;
 }
 
 .legendDate {
