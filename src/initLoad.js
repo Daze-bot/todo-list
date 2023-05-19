@@ -23,11 +23,32 @@ function createHeader() {
   let logoText = document.createElement('h1');
   logoText.textContent = "To-do List";
 
+  let headerIconContainer = document.createElement('div');
+  headerIconContainer.classList.add('headerIcons');
+
+  let signIn = document.createElement('button');
+  signIn.classList.add('signInBtn', 'authBtn');
+  signIn.textContent = "Sign In";
+
+  let signOut = document.createElement('button');
+  signOut.classList.add('signOutBtn', 'authBtn');
+  signOut.textContent = "Sign Out";
+  signOut.setAttribute('hidden', 'true');
+
+  let profilePic = document.createElement('div');
+  profilePic.classList.add('profilePicture');
+  profilePic.setAttribute('hidden', 'true');
+
+  headerIconContainer.appendChild(addThemeButtons());
+  headerIconContainer.appendChild(profilePic);
+  headerIconContainer.appendChild(signIn);
+  headerIconContainer.appendChild(signOut);
+
   logo.appendChild(logoImg);
   logo.appendChild(logoText);
 
   headerContent.appendChild(logo);
-  headerContent.appendChild(addThemeButtons());
+  headerContent.appendChild(headerIconContainer);
 
   header.appendChild(headerContent);
 

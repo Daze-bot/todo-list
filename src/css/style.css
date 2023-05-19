@@ -48,6 +48,45 @@ header {
   color: var(--header-text-color);
 }
 
+.headerIcons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.authBtn {
+  border: 1px solid white;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 1rem;
+  background-color: var(--header-bg-color);
+  color: white;
+  font-weight: bold;
+}
+
+.authBtn:hover {
+  cursor: pointer;
+  color: var(--header-bg-color);
+  background-color: white;
+  box-shadow: 0 2px 10px var(--shadow-color);
+}
+
+.authBtn:active {
+  box-shadow: none;
+}
+
+.profilePicture {
+  position: relative;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  background-size: 40px;
+  border-radius: 20px;
+}
+
 .logo {
   display: flex;
   justify-content: center;
@@ -62,6 +101,12 @@ header {
 .logo img {
   filter: var(--change-white-filter);
   height: 4rem;
+}
+
+.themeBtns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .themeBtns img {
