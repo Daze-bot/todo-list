@@ -2,7 +2,7 @@ import './css/style.css';
 import {createHeader, createSidebar, createFooter, createContent} from './initLoad';
 import {loadProjects, projects} from './project';
 import {showDefaultContent} from './showContent.js';
-import ProfilePicDefault from './imgs/profile.png';
+import ProfilePicDefault from './imgs/profile.svg';
 import { initializeApp } from 'firebase/app';
 import {
   getAuth,
@@ -42,6 +42,10 @@ function getProfilePicUrl() {
   return getAuth().currentUser.photoURL || ProfilePicDefault;
 }
 
+function getUserName() {
+  return getAuth().currentUser.displayName;
+}
+
 function isUserSignedIn() {
   return !!getAuth().currentUser;
 }
@@ -52,11 +56,10 @@ function authStateObserver(user) {
     profilePicture.style.backgroundImage =
       'url(' + addSizeToGoogleProfilePic(profilePicUrl) + ')';
 
-    profilePicture.removeAttribute('hidden');
     signOutButton.removeAttribute('hidden');
     signInButton.setAttribute('hidden', 'true');
   } else {
-    profilePicture.setAttribute('hidden', 'true');
+    profilePicture.style.backgroundImage = 'url(' + ProfilePicDefault + ')';
     signInButton.removeAttribute('hidden');
     signOutButton.setAttribute('hidden', 'true');
   }
@@ -87,4 +90,4 @@ const firebaseConfig = {
 }
 
 initializeApp(firebaseConfig);
-initFirebaseAuth()
+initFirebaseAuth();

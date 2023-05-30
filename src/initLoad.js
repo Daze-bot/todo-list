@@ -37,7 +37,6 @@ function createHeader() {
 
   let profilePic = document.createElement('div');
   profilePic.classList.add('profilePicture');
-  profilePic.setAttribute('hidden', 'true');
 
   headerIconContainer.appendChild(addThemeButtons());
   headerIconContainer.appendChild(profilePic);
