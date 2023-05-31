@@ -1,6 +1,7 @@
 import {createNewTaskForm} from './initLoad';
 import {displayTask, showDefaultContent, showProjectContent, clearTasks, loadTasks} from './showContent';
 
+// Use this if not signed in, otherwise use Firestore (if/else)
 let tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
 let taskID = +localStorage.getItem("taskID") || 0;
 
@@ -237,10 +238,12 @@ function sortTasks(sortChoice) {
   }
 }
 
+// Use this if not signed in, otherwise use Firestore (if/else)
 function saveTasks() {
   window.localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
+// Use this if not signed in, otherwise use Firestore (if/else)
 function saveTaskID() {
   window.localStorage.setItem("taskID", taskID);
 }

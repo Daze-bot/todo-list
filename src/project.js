@@ -3,6 +3,7 @@ import {showProjectContent, showDefaultContent} from './showContent.js';
 import {createProjectEditForm, createNewProjectForm} from './initLoad';
 import {deleteTasksInProject, changeTaskProjects} from './task';
 
+// Use this if not signed in, otherwise use Firestore (if/else)
 let projects = JSON.parse(localStorage.getItem("projects") || "[]");
 let projectID = +localStorage.getItem("projectID") || 0;
 
@@ -197,10 +198,13 @@ function deleteProject() {
   }
 }
 
+
+// Use this if not signed in, otherwise use Firestore (if/else)
 function saveProjects() {
   window.localStorage.setItem("projects", JSON.stringify(projects));
 }
 
+// Use this if not signed in, otherwise use Firestore (if/else)
 function saveProjectID() {
   window.localStorage.setItem("projectID", projectID);
 }

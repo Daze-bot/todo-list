@@ -11,6 +11,14 @@ import {
   onAuthStateChanged,
   signOut,
 } from 'firebase/auth';
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  updateDoc,
+  doc,
+} from 'firebase/firestore';
 
 document.body.appendChild(createHeader());
 document.body.appendChild(createSidebar());
@@ -38,6 +46,10 @@ function initFirebaseAuth() {
   onAuthStateChanged(getAuth(), authStateObserver);
 }
 
+function getUserID() {
+  return getAuth().currentUser.uid;
+}
+
 function getProfilePicUrl() {
   return getAuth().currentUser.photoURL || ProfilePicDefault;
 }
@@ -58,10 +70,12 @@ function authStateObserver(user) {
 
     signOutButton.removeAttribute('hidden');
     signInButton.setAttribute('hidden', 'true');
+    // Load projects and tasks from firebase and showDefaultContent(home)
   } else {
     profilePicture.style.backgroundImage = 'url(' + ProfilePicDefault + ')';
     signInButton.removeAttribute('hidden');
     signOutButton.setAttribute('hidden', 'true');
+    // Load projects and tasks from LocalStorage and showDefaultContent(home)
   }
 }
 
@@ -70,6 +84,32 @@ function addSizeToGoogleProfilePic(url) {
     return url + '?sz=150';
   }
   return url;
+}
+
+async function saveProjectsFirebase(projectData) {
+  try {
+    const currentUser = getUserID();
+    const projectRef = doc(getFirestore(), 'users', currentUser);
+    await updateDoc(projectRef, {
+      projects: projectData,
+    });
+  }
+  catch(error) {
+    console.error('Error saving projects to Firebase', error);
+  }
+}
+
+async function saveTasksFirebase(taskData) {
+  try {
+    const currentUser = getUserID();
+    const projectRef = doc(getFirestore(), 'users', currentUser);
+    await updateDoc(projectRef, {
+      tasks: taskData,
+    });
+  }
+  catch(error) {
+    console.error('Error saving tasks to Firebase', error);
+  }
 }
 
 // DOM Elements
@@ -91,3 +131,9 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig);
 initFirebaseAuth();
+
+export {
+  isUserSignedIn,
+  saveProjectsFirebase,
+  saveTasksFirebase,
+};
