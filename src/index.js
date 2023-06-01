@@ -18,6 +18,7 @@ import {
   getDocs,
   updateDoc,
   doc,
+  getDoc,
 } from 'firebase/firestore';
 
 document.body.appendChild(createHeader());
@@ -112,6 +113,18 @@ async function saveTasksFirebase(taskData) {
   }
 }
 
+async function loadProjectsFirebase() {
+  const docRef = doc(getFirestore(), 'users', currentUser, 'projects');
+  const docSnap = await getDoc(docRef);
+  return docSnap.data();
+}
+
+async function loadTasksFirebase() {
+  const docRef = doc(getFirestore(), 'users', currentUser, 'tasks');
+  const docSnap = await getDoc(docRef);
+  return docSnap.data();
+}
+
 // DOM Elements
 let signInButton = document.querySelector('.signInBtn');
 let signOutButton = document.querySelector('.signOutBtn');
@@ -136,4 +149,6 @@ export {
   isUserSignedIn,
   saveProjectsFirebase,
   saveTasksFirebase,
+  loadProjectsFirebase,
+  loadTasksFirebase,
 };
