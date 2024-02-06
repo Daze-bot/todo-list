@@ -17,6 +17,7 @@ A comprehensive to-do list to assist with daily/weekly/monthly tasks. The user c
 ### Features
 
 - Ability to view tasks by different due dates
+- Sort by either name or due date by clicking on the column header
 - Tasks are managed under different projects for easy organization
 - Set priority and due date for each task
 - Light and Dark mode theme changer
@@ -56,5 +57,14 @@ A comprehensive to-do list to assist with daily/weekly/monthly tasks. The user c
 <div align="center">
   <kbd>
     <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdG11d2c2OTVtOGtqNDR2cW9mem5vNnYzZzZmY3Zvc2g1bzI0Yzd6NSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/owkvIu6iuJs7oxxsDG/giphy.gif"/>
+  </kbd>
+</div>
+
+<br></br>
+
+- Editing tasks and projects:
+<div align="center">
+  <kbd>
+    <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExN3hnbDF4YTV0ZWV1dnU2am1xNGN4YTdtNndxeXY2dmptazhzdmtlZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/RL91CfeeuViYPIF9Yq/giphy.gif"/>
   </kbd>
 </div>
